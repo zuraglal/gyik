@@ -70,6 +70,7 @@ a:active {
 img {
   width: 15%;
   height: auto;
+  padding-right: 5%;
 }
 
 img.h1 {
@@ -84,7 +85,7 @@ table, tr {
 
 td {
   border: 1px solid #1b503f;
-  width: 25%;
+  width: 50%;
 }
 
 tr:nth-child(even) {
