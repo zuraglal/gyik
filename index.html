@@ -1,141 +1,843 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="javascript" href="index.js">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-    <link rel="shortcut icon" type="image/png" href="media/logo/maszk.png">
-    <!--NUNITO FONT-->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-    </style>
-    <link rel="stylesheet" href="style.css">
-    <title>MASZK &ndash; GYIK</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MASZK – irányítópult</title>
+  <meta name="description" content="MASZK (Magyar Amatőr Színjátszók Köre) tag GYIK: belépési nyilatkozat, tagdíj, próbák, WhatsApp, Facebook-csoport, Google Drive, online próba és nyilvános MASZK-linkek egy helyen." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#063b35" />
+  <link rel="canonical" href="https://gyik.maszk.ch/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="hu_HU" />
+  <meta property="og:site_name" content="MASZK" />
+  <meta property="og:title" content="MASZK GYIK – irányítópult tagoknak" />
+  <meta property="og:description" content="Minden fontos MASZK-link és információ tagoknak" />
+  <meta property="og:url" content="https://gyik.maszk.ch/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MASZK GYIK – irányítópult tagoknak" />
+  <meta name="twitter:description" content="Belépés, tagdíj, próbák, csoportok, Drive és nyilvános MASZK-linkek." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MASZK – Magyar Amatőr Színjátszók Köre",
+    "url": "https://maszk.ch/",
+    "email": "info@maszk.ch",
+    "sameAs": [
+      "https://linktr.ee/maszk",
+      "https://www.youtube.com/@maszk_ch",
+      "https://www.facebook.com/maszk.ch",
+      "https://www.instagram.com/maszk.ch",
+      "https://www.tiktok.com/@maszk.ch",
+      "https://twitter.com/maszk_ch"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #041d1a;
+      --bg-soft: #07342f;
+      --card: rgba(255, 255, 255, .08);
+      --card-strong: rgba(255, 255, 255, .13);
+      --text: #f7fbf2;
+      --muted: #c8d9cf;
+      --gold: #d8b365;
+      --gold-soft: #f1d995;
+      --emerald: #0f6b5d;
+      --emerald-light: #2bd4b4;
+      --danger: #ffcf9f;
+      --border: rgba(255, 255, 255, .16);
+      --shadow: 0 22px 80px rgba(0, 0, 0, .36);
+      --radius: 28px;
+      --max: 1120px;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216, 179, 101, .28), transparent 30rem),
+        radial-gradient(circle at 90% 10%, rgba(43, 212, 180, .24), transparent 28rem),
+        linear-gradient(145deg, #031512 0%, var(--bg) 42%, #082a25 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.65), transparent 75%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 99;
+      background: var(--gold);
+      color: #10231f;
+      padding: .7rem 1rem;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 29, 26, .78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      min-width: 0;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(216,179,101,.25);
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(216,179,101,.22);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand strong {
+      display: block;
+      letter-spacing: .02em;
+      line-height: 1;
+    }
+
+    .brand span {
+      display: block;
+      max-width: 56vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: .86rem;
+      margin-top: .24rem;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+
+    .pill,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .48rem;
+      min-height: 42px;
+      padding: .72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+      font-weight: 750;
+      line-height: 1;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      color: #08211d;
+      background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+      border-color: rgba(255,255,255,.28);
+    }
+
+    .button:hover,
+    .pill:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.28);
+    }
+
+    .button.primary:hover { background: linear-gradient(135deg, #ffeab0, var(--gold)); }
+
+    .hero {
+      position: relative;
+      padding: 72px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      width: fit-content;
+      margin-bottom: 1.1rem;
+      padding: .42rem .72rem;
+      border: 1px solid rgba(216,179,101,.42);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(216,179,101,.08);
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.45rem, 8vw, 6.4rem);
+      line-height: .92;
+      letter-spacing: -.075em;
+    }
+
+    .hero p {
+      max-width: 64ch;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      line-height: 1.7;
+      margin: 1.25rem 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1.55rem;
+    }
+
+    .spotlight {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 10px);
+      padding: 1.35rem;
+      background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.055));
+      box-shadow: var(--shadow);
+    }
+
+    .spotlight::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      background: rgba(216,179,101,.28);
+      filter: blur(8px);
+    }
+
+    .spotlight h2,
+    .spotlight p,
+    .spotlight .mini-list { position: relative; z-index: 1; }
+
+    .spotlight h2 {
+      margin: .2rem 0 .6rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      letter-spacing: -.04em;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: .65rem;
+      margin-top: 1.2rem;
+    }
+
+    .mini-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .86rem;
+      border-radius: 20px;
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .mini-item span { color: var(--muted); font-size: .93rem; }
+    .mini-item strong { font-size: .98rem; }
+
+    main { padding-bottom: 80px; }
+
+    .toolbar {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin: 2rem 0 1rem;
+      padding: .7rem;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: rgba(255,255,255,.065);
+      backdrop-filter: blur(14px);
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 1rem 0 2.8rem;
+      color: var(--text);
+      border: 1px solid transparent;
+      outline: none;
+      border-radius: 18px;
+      background: rgba(0,0,0,.18);
+      font: inherit;
+    }
+
+    .search-wrap input:focus { border-color: rgba(216,179,101,.55); }
+    .search-wrap::before {
+      content: "⌕";
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-soft);
+      font-size: 1.35rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: .5rem;
+      overflow-x: auto;
+      padding-bottom: .1rem;
+    }
+
+    .filter {
+      white-space: nowrap;
+      color: var(--muted);
+    }
+
+    .filter[aria-pressed="true"] {
+      color: #08211d;
+      background: var(--gold-soft);
+      border-color: transparent;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 2.3rem 0 1rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      letter-spacing: -.04em;
+    }
+
+    .section-head p {
+      margin: .35rem 0 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 188px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 12px 36px rgba(0,0,0,.16);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216,179,101,.42);
+      background: var(--card-strong);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -70px auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 999px;
+      background: rgba(43,212,180,.12);
+      pointer-events: none;
+    }
+
+    .card-top { position: relative; z-index: 1; }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: .85rem;
+      border-radius: 17px;
+      background: rgba(216,179,101,.13);
+      border: 1px solid rgba(216,179,101,.25);
+      font-size: 1.35rem;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.22rem;
+      letter-spacing: -.025em;
+    }
+
+    .card p {
+      margin: .55rem 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .98rem;
+    }
+
+    .card-footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: .3rem .62rem;
+      color: var(--gold-soft);
+      background: rgba(216,179,101,.12);
+      border: 1px solid rgba(216,179,101,.2);
+      font-size: .78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      color: #08211d;
+      background: var(--gold-soft);
+      font-weight: 950;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .info-box {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.14);
+    }
+
+    .info-box h3 {
+      margin: 0 0 .8rem;
+      letter-spacing: -.02em;
+    }
+
+    .copy-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .6rem;
+      align-items: center;
+      margin-top: .7rem;
+      padding: .72rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,.065);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+
+    .copy-row span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .copy-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: .48rem .7rem;
+      color: #08211d;
+      background: var(--gold-soft);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .notice {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 22px;
+      color: var(--danger);
+      background: rgba(255,207,159,.08);
+      border: 1px solid rgba(255,207,159,.18);
+      line-height: 1.55;
+    }
+
+    .empty {
+      display: none;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(255,255,255,.3);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      color: var(--muted);
+      background: rgba(0,0,0,.14);
+    }
+
+    footer .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .top-link { color: var(--gold-soft); font-weight: 850; }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .details { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .spotlight { order: -1; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 22px, var(--max)); }
+      .nav { min-height: 68px; }
+      .brand span { display: none; }
+      .nav-actions .pill { display: none; }
+      .hero { padding-top: 38px; }
+      .hero-actions .button { width: 100%; }
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .filters { padding-bottom: .25rem; }
+      .grid { grid-template-columns: 1fr; }
+      .card { min-height: 164px; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1><img class="h1" src="media/logo/maszk.png"/> 🎭 MASZK 🎭 <br> Magyar Amatőr Színjátszók Köre</h1>
-    <table>
-        <tr>
-            <th colspan="2">CSAK MASZK-TAGOKNAK</th>
-        </tr>
-  
-        <tr>
-            <td><h3><a href="https://forms.gle/aSCwSGvh2ji2PM9k6">BELÉPÉSI NYILATKOZAT</a></h3></td>
-            <td><p><a href="https://forms.gle/aSCwSGvh2ji2PM9k6">2026-ra: </a> <br> <a href="https://belepes.maszk.ch">belepes.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td rowspan="3"><h3><a href="https://donate.raisenow.io/hnmcz">TAGDÍJ</a></h3></td>
-            <td><p><a href="https://donate.raisenow.io/hnmcz">TWINT: </a> <br> <a href="https://tagdij.maszk.ch">tagdij.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><p>Banki átutalás: 
-                <br> Kedvezményezett: MASZK 
-                <br> IBAN: CH0680808007455441918
-                <br> SWIFT: RAIFCH22XXX
-                <br> Strasse/Nr.: Oechsli 10
-                <br> PLZ/Ort: 8807 Freienbach</p></td>
-        </tr>
-        
-        <tr>
-            <td><p>Készpénzben: <br> Somogyvári Kristófnak</p></td>
-        </tr>
-        
-        <tr>
-            <td rowspan="2"><h3><a href="https://chat.whatsapp.com/GMk68IVAqv0Go9zWz1GX3D">WHATSAPP</a></h3></td>
-            <td><p><a href="https://chat.whatsapp.com/GMk68IVAqv0Go9zWz1GX3D">MASZK🎭-chat: </a> <br> <a href="https://chat.maszk.ch">chat.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><p><a href="https://chat.whatsapp.com/BDMCYbJMJOzAwK6Uhsb4Rr">🎭MASZK🎭-közösség</a> <br> <i>A közösségen belül több csoport van.</i></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><a href="https://www.facebook.com/groups/svajciszinjatszok">FACEBOOK-CSOPORT</a></h3></td>
-            <td><p><a href="https://www.facebook.com/groups/svajciszinjatszok">MASZK 🎭 Magyar Amatőr Színjátszók Köre</a> <br> <a href="https://fb-csoport.maszk.ch">fb-csoport.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><a href="https://drive.google.com/drive/folders/1fduIGslXDthVLeL15Er71t_mFs7eMODn">GOOGLE DRIVE</a></h3></td>
-            <td><p><a href="https://drive.maszk.ch">drive.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><a href="https://www.facebook.com/groups/svajciszinjatszok/events">PRÓBÁK</a></h3></td>
-            <td><p><a href="https://www.facebook.com/groups/svajciszinjatszok/events">MASZK 🎭 Magyar Amatőr Színjátszók Köre Facebook-csoport eseményeinél</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><a href="https://meet.google.com/qcc-rmmm-tda">ONLINE PRÓBA</a></h3></td>
-            <td><p><a href="https://meet.google.com/">Google Meet</a> kód: qcc-rmmm-tda <br> <a href="https://proba.maszk.ch">proba.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3>AKTUÁLIS OKULÁRÉ PROJEKT</h3></td>
-            <td><p><a href="https://drive.google.com/drive/folders/1us9zqkgY0tB7srx99APpGFheVbkDvWce">elso.maszk.ch</a></p></td>
-        </tr>
-        
-    </table>
-    
-    <table>
-        <tr>
-            <th colspan="2">NYILVÁNOS MEGJELENÉSÜNK</th>
-        </tr>
-  
-        <tr>
-            <td><h3><img src="media/logo/web-gold.png"/><a href="https://maszk.ch">HONLAP</a></h3></td>
-            <td><p><a href="https://maszk.ch">maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/email-gold.png"/><a href="mailto:maszk.ch@gmail.com">EMAIL</a></h3></td>
-            <td><p><a href="mailto:maszk.ch@gmail.com">maszk.ch@gmail.com</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/linktree-gold.png"/>LINKTREE</h3></td>
-            <td><p><a href="https://linktr.ee/maszk">linktr.ee/maszk</a> <br> <i>Linkgyűjtemény a nyilvánosság részére.</i></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/chf.png"/><a href="https://donate.raisenow.io/dxxyp">TÁMOGATÁS</a></h3></td>
-            <td><p><a href="https://donate.raisenow.io/dxxyp">TWINT: </a> <br> <a href="https://tamogatas.maszk.ch">tamogatas.maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/youtube-gold.png"/>YOUTUBE</h3></td>
-            <td><p><a href="https://www.youtube.com/@maszk_ch">youtube.com/@maszk_ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/fb-gold.png"/>FACEBOOK</h3></td>
-            <td><p><a href="https://www.facebook.com/maszk.ch/">fb.com/maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/ig-gold.png"/>INSTAGRAM</h3></td>
-            <td><p><a href="https://www.instagram.com/maszk.ch/">instagr.am/maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/tiktok-gold.png"/>TIKTOK</h3></td>
-            <td><p><a href="https://www.tiktok.com/@maszk.ch">tiktok.com/@maszk.ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3><img src="media/logo/x-gold.png"/>X / TWITTER</h3></td>
-            <td><p><a href="https://twitter.com/maszk_ch">twitter.com/maszk_ch</a></p></td>
-        </tr>
-        
-        <tr>
-            <td><h3>AKTUÁLIS SZAVAZÁS</h3></td>
-            <td><p><a href="https://szavazas.maszk.ch">szavazas.maszk.ch</a></p></td>
-        </tr>
-        
-    </table>
+  <a href="#main" class="skip-link">Ugrás a tartalomra</a>
+
+  <header>
+    <nav class="shell nav" aria-label="Fő navigáció">
+      <a class="brand" href="https://maszk.ch/" aria-label="MASZK honlap">
+        <div class="logo" aria-hidden="true"><img src="media/logo/maszk.png" alt="MASZK logo"></div>
+        <div>
+          <strong>MASZK GYIK</strong>
+          <span>Magyar Amatőr Színjátszók Köre</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="pill" href="#tagoknak">Tagoknak</a>
+        <a class="pill" href="#nyilvanos">Nyilvános linkek</a>
+        <a class="button primary" href="https://forms.gle/" target="_blank" rel="noopener">Belépési nyilatkozat</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="page-title">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Csak MASZK-tagoknak</div>
+          <h1 id="page-title">Minden fontos link egy helyen.</h1>
+          <p>
+            Gyors irányítópult tagoknak<br>
+			  Belépés, próbák, tagdíjfizetés, csoportok, közös dokumentumok és a MASZK nyilvános felületei.
+          </p>
+          <div class="hero-actions" aria-label="Kiemelt műveletek">
+            <a class="button primary" href="https://belepes.maszk.ch" target="_blank" rel="noopener">Belépési nyilatkozat</a>
+            <a class="button" href="https://donate.raisenow.io/hnmcz" target="_blank" rel="noopener">Tagdíj befizetése</a>
+            <a class="button" href="https://drive.google.com/drive/folders/1fduIGslXDthVLeL15Er71t_mFs7eMODn" target="_blank" rel="noopener">Google Drive</a>
+            <a class="button" href="https://chat.whatsapp.com/GMk68IVAqv0Go9zWz1GX3D" target="_blank" rel="noopener">WhatsApp-chat</a>
+          </div>
+        </div>
+
+        <aside class="spotlight" aria-labelledby="quick-info-title">
+          <h2 id="quick-info-title">Mi a következő lépés?</h2>
+          <p>Új tagként ezzel a három dolggal érdemes kezdeni:</p>
+          <div class="mini-list">
+            <a class="mini-item" href="https://belepes.maszk.ch" target="_blank" rel="noopener"><strong>Belépési nyilatkozat</strong><span>űrlap</span></a>
+            <a class="mini-item" href="https://chat.whatsapp.com/GMk68IVAqv0Go9zWz1GX3D" target="_blank" rel="noopener"><strong>WhatsApp-chat</strong><span>beszélgetések, szervezés</span></a>
+            <a class="mini-item" href="https://www.facebook.com/groups/svajciszinjatszok/" target="_blank" rel="noopener"><strong>Belsős zárt Facebook-csoport</strong><span>próbák részletei</span></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Keresés és szűrés">
+      <div class="toolbar">
+        <label class="search-wrap">
+          <span class="sr-only">Keresés a MASZK-linkek között</span>
+          <input id="search" type="search" placeholder="Keresés: tagdíj, próba, Drive, WhatsApp…" autocomplete="off" />
+        </label>
+        <div class="filters" role="group" aria-label="Kategória szűrők">
+          <button class="pill filter" type="button" data-filter="all" aria-pressed="true">Összes</button>
+          <button class="pill filter" type="button" data-filter="tagi">Tagi</button>
+          <button class="pill filter" type="button" data-filter="proba">Próba</button>
+          <button class="pill filter" type="button" data-filter="nyilvanos">Nyilvános</button>
+          <button class="pill filter" type="button" data-filter="tamogatas">Támogatás</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" id="tagoknak" aria-labelledby="members-title">
+      <div class="section-head">
+        <div>
+          <h2 id="members-title">Tagoknak</h2>
+          <p>Belső linkek és gyakran keresett MASZK-információk.</p>
+        </div>
+      </div>
+
+      <div class="grid" id="cards">
+        <a class="card" href="https://belepes.maszk.ch" target="_blank" rel="noopener" data-category="tag" data-keywords="belépési nyilatkozat 2026 tagság űrlap">
+          <div class="card-top"><div class="icon">📝</div><h3>Belépési nyilatkozat</h3><p>Tagsági űrlap és 2026-os belépési információk.</p></div>
+          <div class="card-footer"><span class="tag">tagság</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://donate.raisenow.io/hnmcz" target="_blank" rel="noopener" data-category="tag dij" data-keywords="tagdíj twint bank átutalás fizetés">
+          <div class="card-top"><div class="icon">💳</div><h3>Tagdíj</h3><p>TWINT, banki átutalás vagy készpénzes fizetés.</p></div>
+          <div class="card-footer"><span class="tag">tagdíj</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://chat.whatsapp.com/GMk68IVAqv0Go9zWz1GX3D" target="_blank" rel="noopener" data-category="tag" data-keywords="whatsapp maszk chat közösség csoport">
+          <div class="card-top"><div class="icon">💬</div><h3>WhatsApp</h3><p>MASZK-chat és közösségi csoportok egy helyen.</p></div>
+          <div class="card-footer"><span class="tag">chat</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://fb-csoport.maszk.ch" target="_blank" rel="noopener" data-category="tag" data-keywords="facebook csoport maszk tagok">
+          <div class="card-top"><div class="icon">👥</div><h3>Facebook-csoport</h3><p>Belső hírek, események és egyeztetések a tagoknak.</p></div>
+          <div class="card-footer"><span class="tag">közösség</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://drive.google.com/drive/folders/1fduIGslXDthVLeL15Er71t_mFs7eMODn" target="_blank" rel="noopener" data-category="tag" data-keywords="google drive dokumentumok szövegkönyv próbaanyag">
+          <div class="card-top"><div class="icon">📁</div><h3>Google Drive</h3><p>Közös anyagok, dokumentumok, szövegkönyvek és próbaanyagok.</p></div>
+          <div class="card-footer"><span class="tag">google drive</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://www.facebook.com/groups/maszk.ch/events" target="_blank" rel="noopener" data-category="tag proba" data-keywords="próbák események facebook próbaidőpont helyszín">
+          <div class="card-top"><div class="icon">🎭</div><h3>Próbák</h3><p>A próbák időpontja és helyszíne a Facebook-csoport eseményeinél.</p></div>
+          <div class="card-footer"><span class="tag">próba</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://meet.google.com/qcc-rmmm-tda" target="_blank" rel="noopener" data-category="tag online proba" data-keywords="online próba google meet qcc-rmmm-tda">
+          <div class="card-top"><div class="icon">🎥</div><h3>Online próba</h3><p>Google Meet-link, ha online csatlakozol.<br>Kód: qcc-rmmm-tda.<br>(Nem minden próbán lehetséges az online részvétel.)</p></div>
+          <div class="card-footer"><span class="tag">online próba</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://elso.maszk.ch" target="_blank" rel="noopener" data-category="proba tagi" data-keywords="okuláré projekt aktuális első olvasópróba">
+          <div class="card-top"><div class="icon">📖</div><h3>Aktuális Okuláré Projekt</h3><p>Az aktuális olvasópróba és projekthez tartozó anyagok.</p></div>
+          <div class="card-footer"><span class="tag">aktuális</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="https://szavazas.maszk.ch" target="_blank" rel="noopener" data-category="tagi" data-keywords="aktuális szavazás döntés vélemény">
+          <div class="card-top"><div class="icon">🗳️</div><h3>Szavazás</h3><p>Az Okuláré Projekt aktuális szövegeire</p></div>
+          <div class="card-footer"><span class="tag">szavazás</span><span class="arrow">→</span></div>
+        </a>
+      </div>
+
+      <p class="empty" id="empty">Nincs találat. Próbálj másik kulcsszót vagy kategóriát.</p>
+    </section>
+
+    <section class="shell" id="fizetes" aria-labelledby="payment-title">
+      <div class="section-head">
+        <div>
+          <h2 id="payment-title">Tagdíj és banki adatok</h2>
+          <p>Másolható formában, hogy telefonról is gyors legyen.</p>
+        </div>
+        <a class="button primary" href="https://donate.raisenow.io/hnmcz" target="_blank" rel="noopener">TWINT megnyitása</a>
+      </div>
+
+      <div class="details">
+        <div class="info-box">
+          <h3>Banki átutalás</h3>
+          <div class="copy-row"><span>MASZK</span><button class="copy-btn" data-copy="MASZK">Másol</button></div>
+          <div class="copy-row"><span>CH0680808007455441918</span><button class="copy-btn" data-copy="CH0680808007455441918">Másol</button></div>
+          <div class="copy-row"><span>RAIFCH22XXX</span><button class="copy-btn" data-copy="RAIFCH22XXX">Másol</button></div>
+          <div class="copy-row"><span>Oechsli 10, 8807 Freienbach</span><button class="copy-btn" data-copy="Oechsli 10, 8807 Freienbach">Másol</button></div>
+		  <div class="notice"><strong>Fontos:</strong> tagdíjfizetésnél írd a közleménybe a fizetett időszakot, hogy könnyebb legyen az adminisztráció.</div>
+        </div>
+		  
+        <div class="info-box">
+          <h3>Készpénz</h3>
+          <p>Készpénzes tagdíjfizetés a pénztárosnál (Somogyvári Kristóf).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" id="nyilvanos" aria-labelledby="public-title">
+      <div class="section-head">
+        <div>
+          <h2 id="public-title">Nyilvános megjelenésünk</h2>
+          <p>Honlap, közösségi média, támogatás és elérhetőségek.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <a class="card" href="https://maszk.ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="honlap maszk.ch weboldal"><div class="card-top"><div class="icon">🌐</div><h3>Honlap</h3><p>A MASZK hivatalos weboldala.</p></div><div class="card-footer"><span class="tag">web</span><span class="arrow">→</span></div></a>
+        <a class="card" href="mailto:info@maszk.ch" data-category="nyilvanos" data-keywords="email kapcsolat info"><div class="card-top"><div class="icon">✉️</div><h3>Email</h3><p>Kapcsolatfelvétel: info@maszk.ch</p></div><div class="card-footer"><span class="tag">kapcsolat</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://linktr.ee/maszk" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="linktree linkgyűjtemény"><div class="card-top"><div class="icon">🔗</div><h3>Linktree</h3><p>Nyilvános linkgyűjtemény érdeklődőknek.</p></div><div class="card-footer"><span class="tag">linkek</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://tamogatas.maszk.ch" target="_blank" rel="noopener" data-category="nyilvanos tamogatas" data-keywords="támogatás twint donate adomány"><div class="card-top"><div class="icon">💛</div><h3>Támogatás</h3><p>TWINT-es támogatási lehetőség a MASZK számára.</p></div><div class="card-footer"><span class="tag">támogatás</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://www.youtube.com/@maszk_ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="youtube videó"><div class="card-top"><div class="icon">▶️</div><h3>YouTube</h3><p>Videók, felvételek és nyilvános tartalmak.</p></div><div class="card-footer"><span class="tag">közösségi média</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://www.facebook.com/maszk.ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="facebook oldal"><div class="card-top"><div class="icon">📘</div><h3>Facebook</h3><p>Nyilvános Facebook-oldal.</p></div><div class="card-footer"><span class="tag">közösségi média</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://www.instagram.com/maszk.ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="instagram insta"><div class="card-top"><div class="icon">📸</div><h3>Instagram</h3><p>Képek, sztorik, események.</p></div><div class="card-footer"><span class="tag">közösségi média</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://www.tiktok.com/@maszk.ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="tiktok rövid videók"><div class="card-top"><div class="icon">🎬</div><h3>TikTok</h3><p>Rövid videós MASZK-tartalmak.</p></div><div class="card-footer"><span class="tag">közösségi média</span><span class="arrow">→</span></div></a>
+        <a class="card" href="https://twitter.com/maszk_ch" target="_blank" rel="noopener" data-category="nyilvanos" data-keywords="x twitter"><div class="card-top"><div class="icon">𝕏</div><h3>X / Twitter</h3><p>MASZK-tartalmak az X-en.</p></div><div class="card-footer"><span class="tag">közösségi média</span><span class="arrow">→</span></div></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>© <span id="year"></span> MASZK – Magyar Amatőr Színjátszók Köre</span>
+      <a class="top-link" href="#main">Vissza az elejére ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const searchInput = document.querySelector('#search');
+    const filterButtons = document.querySelectorAll('.filter');
+    const cards = document.querySelectorAll('.card[data-category]');
+    const empty = document.querySelector('#empty');
+    let activeFilter = 'all';
+
+    function normalize(value) {
+      return value.toLocaleLowerCase('hu-HU').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function applyFilters() {
+      const query = normalize(searchInput.value.trim());
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.dataset.category || '';
+        const text = normalize(`${card.innerText} ${card.dataset.keywords || ''}`);
+        const matchesFilter = activeFilter === 'all' || category.includes(activeFilter);
+        const matchesSearch = !query || text.includes(query);
+        const visible = matchesFilter && matchesSearch;
+
+        card.style.display = visible ? '' : 'none';
+        if (visible) visibleCount += 1;
+      });
+
+      empty.style.display = visibleCount ? 'none' : 'block';
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(btn => btn.setAttribute('aria-pressed', String(btn === button)));
+        applyFilters();
+      });
+    });
+
+    document.querySelectorAll('.copy-btn').forEach(button => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.copy);
+          const original = button.textContent;
+          button.textContent = 'Kész';
+          setTimeout(() => { button.textContent = original; }, 1200);
+        } catch (error) {
+          alert('Nem sikerült másolni. Jelöld ki kézzel az adatot.');
+        }
+      });
+    });
+
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
