@@ -475,6 +475,30 @@
       gap: 1rem;
     }
 
+	.link-meta {
+      display: grid;
+      gap: .35rem;
+      margin-top: 1rem;
+      padding-top: .85rem;
+      border-top: 1px solid rgba(255,255,255,.11);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+
+    .link-meta span {
+      display: block;
+      color: rgba(247,251,242,.72);
+    }
+
+    .link-meta code {
+      display: block;
+      color: var(--gold-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .tag {
       display: inline-flex;
       align-items: center;
@@ -697,8 +721,23 @@
           <div class="card-footer"><span class="tag">közösség</span><span class="arrow">→</span></div>
         </a>
 
-		<a class="card" href="https://www.facebook.com/groups/svajciszinjatszok" target="_blank" rel="noopener" data-category="tag" data-keywords="facebook csoport maszk tagok">
-          <div class="card-top"><div class="icon">👥</div><h3>Facebook-csoport</h3><p>Belső hírek, események és egyeztetések a tagoknak.</p></div>
+		  <a class="card" href="https://www.facebook.com/groups/svajciszinjatszok/" target="_blank" rel="noopener" data-category="tagi" data-keywords="facebook csoport maszk tagok fb-csoport.maszk.ch">
+          <div class="card-top">
+            <div class="icon">👥</div>
+            <h3>Facebook-csoport</h3>
+            <p>Belső hírek, események és egyeztetések a tagoknak.</p>
+            <div class="link-meta"><span>Rövidlink / cél</span><code>fb-csoport.maszk.ch → facebook.com/groups/…</code></div>
+          </div>
+          <div class="card-footer"><span class="tag">közösség</span><span class="arrow">→</span></div>
+        </a>
+
+		<a class="card" href="https://www.facebook.com/groups/svajciszinjatszok/" target="_blank" rel="noopener" data-category="tag" data-keywords="facebook csoport maszk tagok">
+          <div class="card-top">
+			  <div class="icon">👥</div>
+			  <h3>Facebook-csoport</h3>
+			  <p>Belső hírek, események és egyeztetések a tagoknak.</p>
+			  <div class="link-meta"><code>fb-csoport.maszk.ch</code></div>
+		  </div>
           <div class="card-footer"><span class="tag">közösség</span><span class="arrow">→</span></div>
         </a>
 
